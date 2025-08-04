@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  
+  <!-- Navbar -->
+  <div id="navbar"></div>
+
+  <!-- Page Container -->
+  <div class="max-w-4xl mx-auto mt-10 px-4">
+    
+    <!-- Page Title -->
+    <div class="mb-6">
+      <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
+        🔔 Notifications
+      </h1>
+      <p class="text-gray-500 text-sm mt-1">Stay updated with your project activities</p>
+    </div>
+
+    <!-- Notification Card Container -->
+    <div id="notificationContainer" 
+         class="bg-white shadow-lg rounded-lg overflow-hidden divide-y divide-gray-200">
+      <!-- Notifications will be inserted here -->
+    </div>
+
+  </div>
+
+  <script src="/notifications.js"></script>
+</body>
+</html>

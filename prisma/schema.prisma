@@ -1,0 +1,112 @@
+// ✅ Generator
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ✅ Datasource
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ✅ Models
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+  role     Role
+
+  // Relations
+  projectsOwned Project[]      @relation("UserProjects")
+  tasksAssigned Task[]         @relation("UserTasks")
+  notifications Notification[] 
+  attachments   Attachment[]   
+  comments      Comment[]      
+
+  // 👇 New relation for team members
+  projectMembers ProjectMember[]
+}
+
+model Project {
+  id          Int             @id @default(autoincrement())
+  title       String
+  description String?
+  createdAt   DateTime        @default(now())
+  owner       User            @relation("UserProjects", fields: [ownerId], references: [id])
+  ownerId     Int
+  tasks       Task[]
+  members     ProjectMember[] // 👈 New relation for members
+}
+
+model ProjectMember {
+  id        Int      @id @default(autoincrement())
+  project   Project  @relation(fields: [projectId], references: [id])
+  projectId Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+model Task {
+  id           Int        @id @default(autoincrement())
+  title        String
+  description  String?
+  status       TaskStatus @default(TODO)
+  dueDate      DateTime?
+  project      Project    @relation(fields: [projectId], references: [id])
+  projectId    Int
+  assignedTo   User?      @relation("UserTasks", fields: [assignedToId], references: [id])
+  assignedToId Int?
+  createdAt    DateTime   @default(now())
+
+  // ✅ New Relations
+  attachments  Attachment[]
+  comments     Comment[]
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  message   String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+  read      Boolean  @default(false)
+}
+
+// ✅ File Attachments
+model Attachment {
+  id        Int      @id @default(autoincrement())
+  filename  String
+  fileUrl   String
+  task      Task     @relation(fields: [taskId], references: [id])
+  taskId    Int
+  uploader  User     @relation(fields: [userId], references: [id]) 
+  userId    Int                                            
+  createdAt DateTime @default(now())
+}
+
+// ✅ Comments
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  task      Task     @relation(fields: [taskId], references: [id])
+  taskId    Int
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  parentId  Int?     
+  createdAt DateTime @default(now())
+}
+
+// ✅ Enums
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
+
+enum Role {
+  USER
+  ADMIN
+  MANAGER
+  TEAM
+}

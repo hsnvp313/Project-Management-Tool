@@ -1,0 +1,26 @@
+<nav class="bg-gray-800 p-4 flex justify-between items-center text-white">
+  <!-- App Name -->
+  <div class="text-lg font-bold">PROMPT APP</div>
+
+  <!-- Links -->
+  <div class="flex space-x-4">
+    <a href="/dashboard.html" class="hover:text-yellow-300">Dashboard</a>
+    <a href="/projects.html" class="hover:text-yellow-300">Projects</a>
+     <a href="/notifications.html" class="relative">
+      🔔 <span id="notifCount" class="absolute -top-2 -right-2 bg-red-500 text-xs px-1 rounded-full hidden">0</span>
+    </a>
+  </div>
+
+  <!-- Logout -->
+  <button id="logoutBtn" class="bg-red-500 px-3 py-1 rounded hover:bg-red-600">
+    Logout
+  </button>
+</nav>
+
+<script>
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    window.location.href = "/login.html";
+  });
+</script>

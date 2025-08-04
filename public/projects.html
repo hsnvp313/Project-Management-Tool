@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <div id="navbar"></div>
+    <script src="navbar.js"></script>
+
+    <main class="p-6 max-w-4xl mx-auto">
+      <h1 class="text-2xl font-bold mb-4">📁 Projects</h1>
+
+      <!-- Add Project Section -->
+      <section
+        id="addProjectSection"
+        class="hidden bg-white p-4 rounded shadow mb-4"
+      >
+        <h2 class="text-lg font-bold mb-3">Add New Project</h2>
+        <form id="addProjectForm" class="flex flex-col gap-3">
+          <input
+            type="text"
+            id="projectTitle"
+            placeholder="Project Title"
+            class="border p-2 rounded"
+            required
+          />
+          <textarea
+            id="projectDesc"
+            placeholder="Project Description"
+            class="border p-2 rounded"
+          ></textarea>
+          <button
+            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
+            Add Project
+          </button>
+        </form>
+      </section>
+
+      <!-- Project List -->
+      <div id="projectList" class="grid gap-4"></div>
+    </main>
+
+    <!-- Task Modal -->
+    <div
+      id="taskModal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4"
+    >
+      <div class="bg-white rounded-lg shadow-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 relative">
+        
+        <!-- Close Button -->
+        <button
+          id="closeModal"
+          class="absolute top-2 right-2 text-gray-500 hover:text-black"
+        >
+          ✖
+        </button>
+
+        <!-- Project Title -->
+        <h2 id="modalProjectTitle" class="text-xl font-bold mb-4"></h2>
+
+        <!-- Add Task Form (Admin/Manager only) -->
+        <div id="addTaskSection" class="mb-4 hidden">
+          <select id="assignedMember" class="border p-2 rounded w-full mb-2">
+            <option value="">Unassigned</option>
+          </select>
+
+          <form id="addTaskForm" class="flex gap-2 flex-wrap">
+            <input
+              type="text"
+              id="taskTitle"
+              placeholder="Task Title"
+              class="border p-2 flex-1 rounded"
+            />
+            <select id="taskStatus" class="border p-2 rounded">
+              <option value="TODO">TODO</option>
+              <option value="IN_PROGRESS">In Progress</option>
+              <option value="DONE">Done</option>
+            </select>
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Add
+            </button>
+          </form>
+        </div>
+
+        <!-- Task List -->
+        <ul id="taskList" class="space-y-3"></ul>
+      </div>
+    </div>
+
+    <script src="projects.js"></script>
+  </body>
+</html>

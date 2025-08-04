@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Team</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Navbar -->
+  <div id="navbar"></div>
+
+  <main class="p-6 max-w-3xl mx-auto space-y-6">
+    <!-- Project Title -->
+    <h1 id="projectTitle" class="text-2xl font-bold"></h1>
+
+    <!-- Add Member (Admin/Manager) -->
+    <section id="addMemberSection" class="hidden bg-white p-4 rounded shadow">
+      <h2 class="text-lg font-semibold mb-3">Add Team Member</h2>
+      <form id="addMemberForm" class="flex gap-2">
+        <input type="email" id="memberEmail" placeholder="Enter user email" 
+               class="flex-1 border p-2 rounded" required>
+        <button type="submit" 
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+          Add
+        </button>
+      </form>
+    </section>
+
+    <!-- Member List -->
+    <section>
+      <h2 class="text-lg font-semibold mb-3">Team Members</h2>
+      <ul id="memberList" class="space-y-2"></ul>
+    </section>
+  </main>
+
+  <script src="team.js"></script>
+</body>
+</html>

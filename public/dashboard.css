@@ -1,0 +1,15 @@
+/* Custom Dashboard Styles */
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+#taskList li {
+  border-left: 4px solid transparent;
+  padding-left: 8px;
+}
+
+#taskList li:hover {
+  background-color: #f3f4f6;
+  border-left-color: #3b82f6;
+}
