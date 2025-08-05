@@ -3,7 +3,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  const errorMsg = document.getElementById("errorMsg");
+  const message = document.getElementById("message");
 
   try {
     const res = await fetch("/api/auth/login", {
@@ -14,24 +14,24 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     const data = await res.json();
 
-    if (!res.ok) {
-      errorMsg.textContent = data.error || "Login failed";
-      errorMsg.classList.remove("hidden");
-      return;
+    if (res.ok) {
+      // Save token, role, and userId in localStorage
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.role);
+      localStorage.setItem("userId", data.userId);
+
+      message.style.color = "green";
+      message.textContent = "✅ Login successful! Redirecting...";
+
+      setTimeout(() => {
+        window.location.href = "projects.html"; // Redirect to projects page
+      }, 1500);
+    } else {
+      message.style.color = "red";
+      message.textContent = data.error || "Invalid credentials!";
     }
-
-    // Save token, role, and userId
-localStorage.setItem("token", data.token);
-if (data.user) {
-  localStorage.setItem("role", data.user.role.toUpperCase());
-  localStorage.setItem("userId", data.user.id); // 👈 ADD THIS
-}
-
-    // Redirect to dashboard
-    window.location.href = "/dashboard.html";
-
   } catch (err) {
-    errorMsg.textContent = "Something went wrong";
-    errorMsg.classList.remove("hidden");
+    message.style.color = "red";
+    message.textContent = "⚠️ Network error!";
   }
 });
