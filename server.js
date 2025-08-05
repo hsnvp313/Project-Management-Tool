@@ -11,6 +11,11 @@ dotenv.config();
 const app = express();
 const prisma = new PrismaClient();
 
+
+app.get("/", (req, res) => {
+  res.send("🚀 Project Management Tool API is running!");
+});
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
