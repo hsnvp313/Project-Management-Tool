@@ -66,7 +66,13 @@ router.post('/login', async (req, res) => {
       { expiresIn: "1d" }
     );
 
-    res.status(200).json({ message: 'Login successful', token, user });
+    res.status(200).json({
+  message: 'Login successful',
+  token,
+  role: user.role,   // ✅ Send role explicitly
+  userId: user.id    // ✅ Send userId explicitly
+});
+
   } catch (err) {
     console.error("Login error:", err);
     res.status(500).json({ error: 'Something went wrong', details: err.message });
