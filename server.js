@@ -13,8 +13,9 @@ const prisma = new PrismaClient();
 
 
 app.get("/", (req, res) => {
-  res.send("🚀 Project Management Tool API is running!");
+  res.sendFile(__dirname + "/public/login.html");
 });
+
 
 app.use(cors());
 app.use(express.json());
